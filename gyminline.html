@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="gymInlineEditorApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Gym Content Inline Editor</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    .center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .title-container {
+      display: flex;
+      align-items: center;
+    }
+    .title {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div ng-controller="GymInlineEditorController as gymCtrl" class="container center">
+    <div class="title-container">
+      <h1 class="title" ng-hide="gymCtrl.editingTitle">{{ gymCtrl.title }}</h1>
+      <div ng-show="gymCtrl.editingTitle">
+        <input type="text" class="form-control" ng-model="gymCtrl.title" id="title">
+        <button class="btn btn-outline-secondary ml-2" type="button" ng-click="gymCtrl.saveField('title')"><i class="fas fa-check"></i></button>
+      </div>
+    </div>
+    <button class="btn btn-outline-secondary mt-3" type="button" ng-click="gymCtrl.editField('title')"><i class="fas fa-pencil-alt"></i> Edit Title</button>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    angular.module('gymInlineEditorApp', [])
+    .controller('GymInlineEditorController', function() {
+      var gymCtrl = this;
+      gymCtrl.title = "Your Gym Title Here";
+      gymCtrl.editingTitle = false;
+      gymCtrl.editField = function(field) {
+        gymCtrl.editingTitle = true;
+        // Set a timeout to focus the input after it's shown
+        setTimeout(function() {
+          document.getElementById(field).focus();
+        });
+      };
+      gymCtrl.saveField = function(field) {
+        gymCtrl.editingTitle = false;
+      };
+    });
+  </script>
+</body>
+</html>

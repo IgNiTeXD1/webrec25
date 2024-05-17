@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="gymApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Gym Application</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="MainController as mainCtrl">
+
+    <h1>Welcome to Our Gym!</h1>
+
+    <div ng-show="mainCtrl.error">{{ mainCtrl.error }}</div>
+
+    <h2>Classes</h2>
+    <ul>
+        <li ng-repeat="class in mainCtrl.classes">
+            {{ class.name }} with {{ class.instructor }}
+            <button ng-click="mainCtrl.bookClass(class)">Book</button>
+        </li>
+    </ul>
+
+    <h2>Instructors</h2>
+    <ul>
+        <li ng-repeat="instructor in mainCtrl.instructors">
+            {{ instructor.name }}
+        </li>
+    </ul>
+
+    <h2>My Booked Classes</h2>
+    <ul>
+        <li ng-repeat="bookedClass in mainCtrl.bookedClasses">
+            {{ bookedClass.name }} with {{ bookedClass.instructor }}
+        </li>
+    </ul>
+
+    <script>
+        var app = angular.module('gymApp', []);
+
+        app.controller('MainController', function() {
+            var mainCtrl = this;
+
+            mainCtrl.classes = [
+                { name: 'Yoga', instructor: 'Alice' },
+                { name: 'Pilates', instructor: 'Bob' },
+                { name: 'Spinning', instructor: 'Carol' }
+            ];
+
+            mainCtrl.instructors = [
+                { name: 'Alice' },
+                { name: 'Bob' },
+                { name: 'Carol' }
+            ];
+
+            mainCtrl.bookedClasses = [];
+
+            mainCtrl.bookClass = function(classToBook) {
+                mainCtrl.bookedClasses.push(classToBook);
+            };
+        });
+    </script>
+</body>
+</html>
+
+
+

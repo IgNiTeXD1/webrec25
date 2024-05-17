@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="gymApp">
+<head>
+    <meta charset="UTF-8">
+    <title>SINGLE PAGE APPLICATION</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f2f2f2;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #666;
+            margin-top: 20px;
+            font-size: 20px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        li:hover {
+            background-color: #f9f9f9;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .booked {
+            color: #fff;
+            background-color: #007bff;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="MainController as mainCtrl">
+
+    <h1>Welcome to Our WAVS FITNESS CENTRE</h1>
+
+    <div ng-show="mainCtrl.error">{{ mainCtrl.error }}</div>
+
+    <h2>Classes</h2>
+    <ul>
+        <li ng-repeat="class in mainCtrl.classes">
+            <span>{{ class.name }} with {{ class.instructor }}</span>
+            <button ng-click="mainCtrl.bookClass(class)">Book</button>
+        </li>
+    </ul>
+
+    <h2>Instructors</h2>
+    <ul>
+        <li ng-repeat="instructor in mainCtrl.instructors">
+            {{ instructor.name }}
+        </li>
+    </ul>
+
+    <h2>My Booked Classes</h2>
+    <ul>
+        <li ng-repeat="bookedClass in mainCtrl.bookedClasses" class="booked">
+            {{ bookedClass.name }} with {{ bookedClass.instructor }}
+        </li>
+    </ul>
+
+    <script>
+        var app = angular.module('gymApp', []);
+
+        app.controller('MainController', function() {
+            var mainCtrl = this;
+
+            mainCtrl.classes = [
+                { name: 'Yoga', instructor: 'KRISHNA' },
+                { name: 'Pilates', instructor: 'DEEPAK' },
+                { name: 'Spinning', instructor: 'HARINI' }
+            ];
+
+            mainCtrl.instructors = [
+                { name: 'KRISHNA' },
+                { name: 'DEEPAK' },
+                { name: 'HARINI' }
+            ];
+
+            mainCtrl.bookedClasses = [];
+
+            mainCtrl.bookClass = function(classToBook) {
+                mainCtrl.bookedClasses.push(classToBook);
+            };
+        });
+    </script>
+</body>
+</html>
+

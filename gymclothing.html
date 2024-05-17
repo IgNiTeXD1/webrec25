@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="clothingApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Gym Clothing Store</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div ng-controller="ClothingController as clothingCtrl" class="container mt-5">
+    <h1>Gym Clothing Store</h1>
+    <div class="btn-group mb-3">
+      <button class="btn btn-primary" ng-click="clothingCtrl.switchView('grid')">Grid View</button>
+      <button class="btn btn-primary" ng-click="clothingCtrl.switchView('list')">List View</button>
+    </div>
+    <div ng-show="clothingCtrl.currentView === 'grid'">
+      <div class="row">
+        <div class="col-md-4 mb-3" ng-repeat="item in clothingCtrl.items">
+          <div class="card">
+            <img class="card-img-top" src="{{ item.image }}" alt="{{ item.name }}">
+            <div class="card-body">
+              <h5 class="card-title">{{ item.name }}</h5>
+              <p class="card-text">{{ item.description }}</p>
+              <p class="card-text">Price: ${{ item.price }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div ng-show="clothingCtrl.currentView === 'list'">
+      <ul class="list-group">
+        <li class="list-group-item" ng-repeat="item in clothingCtrl.items">
+          <img src="{{ item.image }}" alt="{{ item.name }}" style="max-width: 100px; margin-right: 10px;">
+          <strong>{{ item.name }}</strong> - {{ item.description }} - Price: ${{ item.price }}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script>
+    angular.module('clothingApp', [])
+    .controller('ClothingController', function() {
+      var clothingCtrl = this;
+      clothingCtrl.items = [
+        { name: 'Gym T-Shirt', description: 'Breathable and moisture-wicking fabric', price: 25, image: 'https://via.placeholder.com/150' },
+        { name: 'Leggings', description: 'Stretchable and comfortable for workouts', price: 30, image: 'https://via.placeholder.com/150' },
+        { name: 'Tank Top', description: 'Lightweight and sleeveless for intense workouts', price: 20, image: 'https://via.placeholder.com/150' },
+        { name: 'Training Shorts', description: 'Quick-drying fabric with built-in compression', price: 35, image: 'https://via.placeholder.com/150' },
+        { name: 'Hoodie', description: 'Warm and cozy for outdoor workouts', price: 40, image: 'https://via.placeholder.com/150' }
+      ];
+      clothingCtrl.currentView = 'grid';
+      clothingCtrl.switchView = function(view) {
+        clothingCtrl.currentView = view;
+      };
+    });
+  </script>
+</body>
+</html>

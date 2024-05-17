@@ -1,0 +1,77 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font: 15px/1.3 'Open Sans', sans-serif;
+    color: #ffffff; /* White text color */
+    text-align: center;
+    background-color: #7b68ee; /* Purple background color */
+}
+
+a, a:visited {
+    outline: none;
+    color: #ffc0cb; /* Pink link color */
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a img {
+    display: inline-block;
+}
+
+section, footer, header, aside, nav {
+    display: block;
+}
+
+nav {
+    display: inline-block;
+    margin: 60px auto 45px;
+    background-color: #3b3054; /* Dark purple nav background */
+    box-shadow: 0 1px 1px #ccc;
+    border-radius: 2px;
+}
+
+nav h2 {
+    color: #ffffff !important; /* White heading color */
+}
+
+nav a {
+    display: inline-block;
+    padding: 18px 30px;
+    color: #ffffff !important; /* White link color */
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none !important;
+    line-height: 1;
+    text-transform: uppercase;
+    background-color: transparent;
+
+    -webkit-transition: background-color 0.25s;
+    -moz-transition: background-color 0.25s;
+    transition: background-color 0.25s;
+}
+
+nav a:first-child {
+    border-radius: 2px 0 0 2px;
+}
+
+nav a:last-child {
+    border-radius: 0 2px 2px 0;
+}
+
+nav.home .home,
+nav.clothing .clothing,
+nav.accessories .accessories,
+nav.equipment .equipment {
+    color: #ffff00 !important; /* Yellow active menu item color */
+}
+
+p {
+    font-size: 22px;
+    font-weight: bold;
+    color: #ffffff; /* White paragraph color */
+}

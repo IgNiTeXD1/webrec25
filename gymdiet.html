@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="dietFoodApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Diet Food Order Form</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+ <style>
+    body, html {
+      height: 100%;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+    .diet-form {
+      max-width: 400px;
+      width: 100%;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-label {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div ng-controller="DietFoodController as dietCtrl" class="container">
+    <form class="diet-form">
+      <div class="form-group">
+        <label for="meals" class="form-label">Select Meals:</label>
+        <select multiple class="form-control" id="meals" ng-model="dietCtrl.selectedMeals" ng-options="meal as meal.name for meal in dietCtrl.meals">
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="quantity" class="form-label">Quantity:</label>
+        <input type="number" class="form-control" id="quantity" ng-model="dietCtrl.quantity">
+      </div>
+      <button type="button" class="btn btn-primary" ng-click="dietCtrl.addToCart()">Add to Cart</button>
+      <div class="form-group mt-3">
+        <label class="form-label">Cart:</label>
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="item in dietCtrl.cart">{{ item.meal.name }} - Quantity: {{ item.quantity }} - Total: ${{ item.total }}</li>
+        </ul>
+        <p class="mt-3">Grand Total: ${{ dietCtrl.grandTotal }}</p>
+      </div>
+    </form>
+  </div>
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script>
+    angular.module('dietFoodApp', [])
+    .controller('DietFoodController', function() {
+      var dietCtrl = this;
+      dietCtrl.meals = [
+        { name: 'Grilled Chicken Breast', cost: 10 },
+        { name: 'Salmon Fillet', cost: 15 },
+        { name: 'Quinoa Salad', cost: 8 },
+        { name: 'Steamed Vegetables', cost: 6 },
+        { name: 'Greek Yogurt Parfait', cost: 5 }
+      ];
+
+      dietCtrl.selectedMeals = [];
+      dietCtrl.quantity = "";
+      dietCtrl.cart = [];
+      dietCtrl.grandTotal = 0;
+
+      // Function to add item to cart
+      dietCtrl.addToCart = function() {
+        if (dietCtrl.selectedMeals.length && dietCtrl.quantity) {
+          angular.forEach(dietCtrl.selectedMeals, function(meal) {
+            var total = meal.cost * dietCtrl.quantity;
+            dietCtrl.cart.push({ meal: meal, quantity: dietCtrl.quantity, total: total });
+            dietCtrl.grandTotal += total;
+          });
+          // Clear input fields after adding to cart
+          dietCtrl.selectedMeals = [];
+          dietCtrl.quantity = "";
+        } else {
+          console.log("Please select meal(s) and enter a quantity.");
+        }
+      };
+    });
+  </script>
+</body>
+</html>

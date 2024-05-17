@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="equipmentSearchApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Equipment Search - Gym</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div ng-controller="SearchController as searchCtrl" class="container mt-5">
+    <h1>Equipment Search - Gym</h1>
+    <input type="text" class="form-control mt-3" placeholder="Search..." ng-model="searchCtrl.query">
+    <ul class="list-group mt-3">
+      <li class="list-group-item" ng-repeat="equipment in searchCtrl.equipment | filter:searchCtrl.query">{{ equipment }}</li> 
+    </ul>
+  </div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script>
+    angular.module('equipmentSearchApp', [])
+    .controller('SearchController', function() {
+      var searchCtrl = this;
+      searchCtrl.equipment = [
+        'Treadmill', 
+        'Elliptical Trainer', 
+        'Stationary Bike', 
+        'Rowing Machine', 
+        'Barbell', 
+        'Dumbbell', 
+        'Kettlebell', 
+        'Resistance Bands', 
+        'Smith Machine', 
+        'Leg Press Machine', 
+        'Cable Machine', 
+        'Pull-up Bar', 
+        'Exercise Ball', 
+        'Foam Roller', 
+        'Jump Rope'
+      ];
+    });
+  </script>
+</body>
+</html>

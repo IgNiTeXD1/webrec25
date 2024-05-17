@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="STYLEGYM.CSS">
+  <script src="https://code.angularjs.org/1.2.13/angular.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.7.1/angular-material-icons.min.js"></script> 
+  <script src="app.js"></script>
+</head>
+<body>
+  <div id="main" ng-app="navApp">
+    <nav class="{{active}}" ng-click="$event.preventDefault()">
+        <h2>Gym Merch Sale</h2>
+        <a href="#" class="home" ng-click="active='home'">
+         <ng-md-icon icon="home" style="fill:white"></ng-md-icon>
+        </a>
+        <a href="#" class="clothing" ng-click="active='clothing'">
+          Clothing</a>
+        <a href="#" class="accessories" ng-click="active='accessories'">
+          Accessories</a>
+        <a href="#" class="equipment" ng-click="active='equipment'">
+          Equipment</a>
+    </nav>   
+    <p ng-show="active">You chose <b>Clothing</b></p>
+    
+  </div>
+</body>
+</html>
